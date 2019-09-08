@@ -4,7 +4,7 @@ import re
 import os
 import sys
 from textblob import Word
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 
 def processTextFile(text_file):
@@ -49,12 +49,19 @@ def processTextFile(text_file):
             cleaner = cleaner.strip('\'"')
             cleaned_txt = cleaner
             return cleaned_txt
+        
+def OutputFile(word_content, outFile):
+    Fwriter = open(outFile, 'w')
+    Fwriter.write(word_content)
+    Fwriter.close()
 
 def main():
     if len(sys.argv) == 2:
         text_file = sys.argv[1]
+        outFile = "Output" + sys.argv[1]
         word_processor = processTextFile(text_file)
-        print(word_processor)
+        OutputFile(word_processor, outFile)
+        print("[]* Done! Check your current working folder for the output file.")
     else:
         print("USEAGE: word_processor.py REQUIRES AN ARGUMENT: A TEXTFILE")
 if __name__ == '__main__':
